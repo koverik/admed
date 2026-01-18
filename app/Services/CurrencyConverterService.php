@@ -38,7 +38,7 @@ class CurrencyConverterService
     {
         try {
             return Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-                
+
                 $rate = $this->fetchFromApi();
 
                 if ($rate !== null) {
@@ -149,21 +149,22 @@ class CurrencyConverterService
         }
     }
 
-    public function getLastUpdate(): ?string
+    private function getCurrencyRateRecord(): ?CurrencyRate
     {
-        $record = CurrencyRate::where('from_currency', 'HUF')
+        return CurrencyRate::where('from_currency', 'HUF')
             ->where('to_currency', 'EUR')
             ->first();
+    }
 
+    public function getLastUpdate(): ?string
+    {
+        $record = $this->getCurrencyRateRecord();
         return $record ? $record->updated_at->toIso8601String() : null;
     }
 
     public function getRateAge(): ?int
     {
-        $record = CurrencyRate::where('from_currency', 'HUF')
-            ->where('to_currency', 'EUR')
-            ->first();
-
+        $record = $this->getCurrencyRateRecord();
         return $record ? $record->getAgeInHours() : null;
     }
 }

@@ -47,7 +47,7 @@ class CurrencyRate extends Model
 
     public function getAgeInHours(): int
     {
-        return (int) now()->diffInHours($this->updated_at);
+        return (int) $this->updated_at->diffInHours();
     }
 
     public function isStale(int $maxHours = 24): bool

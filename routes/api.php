@@ -20,7 +20,6 @@ Route::prefix('statistics')->group(function () {
     Route::get('/top-fantasy-and-sci-fi', [StatisticsController::class, 'topFantasyAndSciFi']);
 });
 
-// Currency endpoints (public)
 Route::prefix('currency')->group(function () {
     Route::get('/rate', [CurrencyController::class, 'getRate']);
     Route::get('/convert/{amount}', [CurrencyController::class, 'convertAmount'])->where('amount', '[0-9]+(\.[0-9]+)?');
