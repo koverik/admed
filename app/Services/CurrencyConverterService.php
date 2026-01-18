@@ -38,7 +38,7 @@ class CurrencyConverterService
     {
         try {
             return Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-                // Try to fetch from external API
+                
                 $rate = $this->fetchFromApi();
 
                 if ($rate !== null) {
