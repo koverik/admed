@@ -17,7 +17,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unique(['from_currency', 'to_currency']);
-            $table->index(['from_currency', 'to_currency']);
         });
     }
 
